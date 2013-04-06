@@ -2,9 +2,10 @@
 <html>
 <head>
 
+
     <script type="text/javascript">
 
-        //Global Variables
+
         var marked;
         var content;
         var combinations;
@@ -23,9 +24,9 @@
             content = new Array();
             combinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
-            for(var l = 0; l <= 8; l++){
-                marked[l] = false;
-                content[l]='';
+            for(var i = 0; i<= 8; i++){
+                marked[i] = false;
+                content[i]='';
             }
         }
 
@@ -63,7 +64,7 @@
                 if(squaresFilled==9){
                     alert("THE GAME IS OVER!");
                     location.reload(true);
-                    playAgain();
+
                 }
 
             }
@@ -78,7 +79,7 @@
             for(var a = 0; a < combinations.length; a++){
                 if(content[combinations[a][0]]==symbol&&content[combinations[a][1]]==	symbol&&content[combinations[a][2]]==symbol){
                     alert(symbol+ " WON!");
-
+                    playAgain();
                 }
             }
 
@@ -102,15 +103,24 @@
 <body>
 <div id ="box">
     <h1>Tic-Tac-Toe</h1>
-    <canvas id = "canvas1"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(1)"></canvas>
-    <canvas id = "canvas2"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(2)"></canvas>
-    <canvas id = "canvas3"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(3)"></canvas><br/>
-    <canvas id = "canvas4"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(4)"></canvas>
-    <canvas id = "canvas5"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(5)"></canvas>
-    <canvas id = "canvas6"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(6)"></canvas><br/>
-    <canvas id = "canvas7"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(7)"></canvas>
-    <canvas id = "canvas8"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(8)"></canvas>
-    <canvas id = "canvas9"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(9)"></canvas>
+    <canvas id = "canvas1"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(1)"></canvas>
+    <canvas id = "canvas2"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(2)"></canvas>
+    <canvas id = "canvas3"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(3)"></canvas><br/>
+    <canvas id = "canvas4"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(4)"></canvas>
+    <canvas id = "canvas5"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(5)"></canvas>
+    <canvas id = "canvas6"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(6)"></canvas><br/>
+    <canvas id = "canvas7"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(7)"></canvas>
+    <canvas id = "canvas8"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(8)"></canvas>
+    <canvas id = "canvas9"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(9)"></canvas>
 </div>
 </body>
 </html>
