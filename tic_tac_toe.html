@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <script type="text/javascript">
+
+        //Global Variables
+        var marked;
+        var content;
+        var combinations;
+        var turn = 0;
+        var theCanvas;
+        var c;
+        var cxt;
+        var squaresFilled = 0;
+        var w;
+        var y;
+
+
+        window.onload=function(){
+
+            marked = new Array();
+            content = new Array();
+            combinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+            for(var l = 0; l <= 8; l++){
+                marked[l] = false;
+                content[l]='';
+            }
+        }
+
+
+        function canvasClicked(canvasNumber){
+            theCanvas = "canvas"+canvasNumber;
+            c = document.getElementById(theCanvas);
+            cxt = c.getContext("2d");
+
+            if(marked[canvasNumber-1] ==false){
+                if(turn%2==0){
+                    cxt.beginPath();
+                    cxt.moveTo(10,10);
+                    cxt.lineTo(40,40);
+                    cxt.moveTo(40,10);
+                    cxt.lineTo(10,40);
+                    cxt.stroke();
+                    cxt.closePath();
+                    content[canvasNumber-1] = 'X';
+                }
+
+                else{
+                    cxt.beginPath();
+                    cxt.arc(25,25,20,0,Math.PI*2,true);
+                    cxt.stroke();
+                    cxt.closePath();
+                    content[canvasNumber-1] = 'O';
+                }
+
+                turn++;
+                marked[canvasNumber-1] = true;
+                squaresFilled++;
+                checkForWinners(content[canvasNumber-1]);
+
+                if(squaresFilled==9){
+                    alert("THE GAME IS OVER!");
+                    location.reload(true);
+                    playAgain();
+                }
+
+            }
+            else{
+                alert("THAT SPACE IS ALREADY OCCUPIED");
+            }
+
+        }
+
+        function checkForWinners(symbol){
+
+            for(var a = 0; a < combinations.length; a++){
+                if(content[combinations[a][0]]==symbol&&content[combinations[a][1]]==	symbol&&content[combinations[a][2]]==symbol){
+                    alert(symbol+ " WON!");
+
+                }
+            }
+
+        }
+
+        function playAgain(){
+            y=confirm("PLAY AGAIN?");
+            if(y==true){
+                alert("OKAY!");
+                location.reload(true);
+            }
+            else{
+                alert("Sad :(");
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+<div id ="box">
+    <h1>Tic-Tac-Toe</h1>
+    <canvas id = "canvas1"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(1)"></canvas>
+    <canvas id = "canvas2"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(2)"></canvas>
+    <canvas id = "canvas3"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(3)"></canvas><br/>
+    <canvas id = "canvas4"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(4)"></canvas>
+    <canvas id = "canvas5"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(5)"></canvas>
+    <canvas id = "canvas6"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(6)"></canvas><br/>
+    <canvas id = "canvas7"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(7)"></canvas>
+    <canvas id = "canvas8"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(8)"></canvas>
+    <canvas id = "canvas9"  width="50" height="50" style="border:1px solid black" onclick="canvasClicked(9)"></canvas>
+</div>
+</body>
+</html>
+
+
