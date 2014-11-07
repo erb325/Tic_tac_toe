@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<body>
+
+    <script type="text/javascript">
+
+    var human = 'x'; // turn = 0
+    var computer = 'o'; // turn = 1
+    var compMove;
+    var turn = 0; 
+
+    var marked;
+    var content;
+    var combinations;
+    var turn = 0;
+    var theCanvas;
+    var c;
+    var cxt;
+    var squaresFilled = 0;
+    var w;
+    var y;
+    var xWin = false; // true if X wins 
+    var oWin = false;
+
+
+    window.onload=function(){
+        marked = new Array();
+        content = new Array();
+        combinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+        for(var i = 0; i<= 8; i++){
+            marked[i] = false;
+            content[i]='';
+        }
+    }
+
+        function canvasClicked(canvasNumber){
+            theCanvas = "canvas"+canvasNumber;
+            c = document.getElementById(theCanvas);`
+            cxt = c.getContext("2d");
+
+            if(marked[canvasNumber-1] ==false){
+                if(turn==0){
+                    cxt.beginPath();
+                    cxt.moveTo(10,10);
+                    cxt.lineTo(40,40);
+                    cxt.moveTo(40,10);
+                    cxt.lineTo(10,40);
+                    cxt.stroke();
+                    cxt.closePath();
+                    content[canvasNumber-1] = 'X';
+                }
+
+                else{
+                    compMove();
+                }
+
+                turn++;
+                marked[canvasNumber-1] = true;
+                squaresFilled++;
+                checkForWinners(content[canvasNumber-1]);
+
+                if(squaresFilled==9){
+                    alert("THE GAME IS OVER!");
+                    location.reload(true);
+
+                }
+
+            }
+            else{
+                alert("THAT SPACE IS ALREADY OCCUPIED");
+            }
+
+        }
+
+function checkForWinners(symbol){
+
+            for(var a = 0; a < combinations.length; a++){
+                if(content[combinations[a][0]]==symbol&&content[combinations[a][1]]==   symbol&&content[combinations[a][2]]==symbol){
+                    alert(symbol+ " WON!");
+
+                    playAgain();
+                }
+            }
+
+        }
+
+
+        var compMove = function () {
+    if (marked[0] == "" && ((marked[2] == "x" && marked[1] == "x") || (marked[8] == "x" && marked[5] == "x") || (marked[6] == "x" && marked[3] == "x"))) {
+        $('#canvas1').text("o");
+        turn = 0;
+    } else {
+      if (marked[1] == "" && ((marked[0] == "x" && marked[2] == "x") || (marked[7] == "x" && marked[4] == "x"))) {
+        $('#canvas2').text("o");
+        turn = 0;
+        } else{
+        if (marked[2] == "" && ((marked[0] == "x" && marked[1] == "x") || (marked[6] == "x" && marked[4] == "x") || (marked[8] == "x" && marked[5] == "x"))) {
+            $('#canvas3').text("o");
+            turn = 0;
+        }
+            else{
+            if (marked[8] == "" && ((marked[6] == "x" && marked[7] == "x") || (marked[0] == "x" && marked[4] == "x") || (marked[2] == "x" && marked[5] == "x"))) {
+                $('#canvas9').text("o");
+                turn = 0;
+        }
+                else{
+                if (marked[6] == "" && ((marked[8] == "x" && marked[7] == "x") || (marked[2] == "x" && marked[4] == "x") || (marked[0] == "x" && marked[3] == "x"))) {
+                    $('#canvas7').text("o");
+                    turn = 0;
+        }
+                    else{
+                    if (marked[7] == "" && ((marked[8] == "x" && marked[6] == "x") || (marked[1] == "x" && marked[4] == "x"))) {
+                        $('#canvas8').text("o");
+                        turn = 0;
+        }
+                        else{
+                        if (marked[3] == "" && ((marked[5] == "x" && marked[4] == "x") || (marked[0] == "x" && marked[6] == "x"))) {
+                            $('#canvas4').text("o");
+                            turn = 0;
+        }
+                            else{
+                            if (marked[5] == "" && ((marked[2] == "x" && marked[8] == "x") || (marked[4] == "x" && marked[3] == "x"))) {
+                                $('#canvas6').text("o");
+                                turn = 0;
+        }
+                                else{
+                                if (marked[4] == "" && ((marked[2] == "x" && marked[6] == "x") || (marked[8] == "x" && marked[0] == "x") || (marked[5] == "x" && marked[3] == "x") || (marked[7] == "x" && marked[1] == "x"))) {
+                                    $('#canvas5').text("o");
+                                    turn = 0;
+        }
+                                   else{ // IF NO OPP TO BLOCK A WIN, THEN PLAY IN ONE OF THESE SQUARES
+                                    if (marked[4] == "") {
+                                        $('#canvas5').text("o");
+                                        turn = 0;
+                                       
+                                    }
+                                        else{
+                                        if (marked[0] == "") {
+                                            $('#canvas1').text("o");
+                                            turn = 0;
+                                            
+                                    }
+                                            else{
+                                            if (marked[8] == "") {
+                                            $('#canvas9').text("o");
+                                            turn = 0;
+                                          
+                                    } 
+                                                else {
+                                                if (marked[7] == "") {
+                                            $('#canvas8').text("o");
+                                            turn = 0;
+                                          
+                                    }
+                                                    else{
+                                                    if (marked[3] == "") {
+                                            $('#canvas4').text("o");
+                                            turn = 0;
+                                          
+                                    }
+                                                    }
+                                                }
+                                            }
+                                   
+                                    
+                                        }
+                                   }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }   
+};
+
+
+    </script>
+
+
+    <h1> TIC TAC TOE AI</h1>
+    <br>
+    <p class="center italic">Single player game</p>
+    
+    <br>
+    <br>
+    <div>
+        <canvas id = "canvas1"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(1)"></canvas>
+        <canvas id = "canvas2"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(2)"></canvas>
+        <canvas id = "canvas3"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(3)"></canvas><br/>
+        <canvas id = "canvas4"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(4)"></canvas>
+        <canvas id = "canvas5"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(5)"></canvas>
+        <canvas id = "canvas6"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(6)"></canvas><br/>
+        <canvas id = "canvas7"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(7)"></canvas>
+        <canvas id = "canvas8"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(8)"></canvas>
+        <canvas id = "canvas9"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(9)"></canvas>
+</div>
+    </div>
+    <br>
+    <div class="center button">
+        <button id="restart">New game</button>
+    </div>
+</body>
