@@ -48,6 +48,18 @@
                     cxt.stroke();
                     cxt.closePath();
                     content[canvasNumber-1] = 'X';
+
+                    switch(canvasNumber){
+                        case 1:
+                            $('#canvas1').text("x");
+                            break;
+                        case 2:
+                            $('#canvas2').text("x");
+                            break;
+                        case 3:
+                            $('#canvas3').text("x");
+                            break;
+                    }
                 }
 
                 else{
@@ -84,95 +96,82 @@ function checkForWinners(symbol){
 
         }
 
-
+/* change to content array instead of marked
+ */
         var compMove = function () {
-    if (marked[0] == "" && ((marked[2] == "x" && marked[1] == "x") || (marked[8] == "x" && marked[5] == "x") || (marked[6] == "x" && marked[3] == "x"))) {
+    if (content[0] == "" && ((content[2] == "x" && content[1] == "x") || (content[8] == "x" && content[5] == "x") || (content[6] == "x" && content[3] == "x"))) {
         $('#canvas1').text("o");
+         marked[canvasNumber-1] = true;
+
         turn = 0;
-    } else {
-      if (marked[1] == "" && ((marked[0] == "x" && marked[2] == "x") || (marked[7] == "x" && marked[4] == "x"))) {
+    } else if (content[1] == "" && ((content[0] == "x" && content[2] == "x") || (content[7] == "x" && content[4] == "x"))) {
         $('#canvas2').text("o");
+        marked[canvasNumber-1] = true;
+
         turn = 0;
-        } else{
-        if (marked[2] == "" && ((marked[0] == "x" && marked[1] == "x") || (marked[6] == "x" && marked[4] == "x") || (marked[8] == "x" && marked[5] == "x"))) {
-            $('#canvas3').text("o");
+    } else if (content[2] == "" && ((content[0] == "x" && content[1] == "x") || (content[6] == "x" && content[4] == "x") ||      (content[8] == "x" && content[5] == "x"))) {
+        $('#canvas3').text("o");
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[8] == "" && ((content[6] == "x" && content[7] == "x") || (content[0] == "x" && content[4] == "x") ||      (content[2] == "x" && content[5] == "x"))) {
+        $('#canvas9').text("o");
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[6] == "" && ((content[8] == "x" && content[7] == "x") || (content[2] == "x" && content[4] == "x") ||      (content[0] == "x" && content[3] == "x"))) {
+        $('#canvas7').text("o");
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[7] == "" && ((content[8] == "x" && content[6] == "x") || (content[1] == "x" && content[4] == "x"))) {
+        $('#canvas8').text("o");
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[3] == "" && ((content[5] == "x" && content[4] == "x") || (content[0] == "x" && content[6] == "x"))) {
+        $('#canvas4').text("o");
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[5] == "" && ((content[2] == "x" && content[8] == "x") || (content[4] == "x" && content[3] == "x"))) {
+        $('#canvas6').text("o");
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[4] == "" && ((content[2] == "x" && content[6] == "x") || (content[8] == "x" && content[0] == "x") ||      (content[5] == "x" && content[3] == "x") || (content[7] == "x" && content[1] == "x"))) {
+        $('#canvas5').text("o");
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else{ // IF NO OPP TO BLOCK A WIN, THEN PLAY IN ONE OF THESE SQUARES
+        if (content[4] == "") {
+            $('#canvas5').text("o");
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        } else if (content[0] == "") {
+            $('#canvas1').text("o");
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        } else if (content[8] == "") {
+            $('#canvas9').text("o");
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        } else if (content[7] == "") {
+            $('#canvas8').text("o");
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        } else if (content[3] == "") {
+            $('#canvas4').text("o");
+            marked[canvasNumber-1] = true;
+
             turn = 0;
         }
-            else{
-            if (marked[8] == "" && ((marked[6] == "x" && marked[7] == "x") || (marked[0] == "x" && marked[4] == "x") || (marked[2] == "x" && marked[5] == "x"))) {
-                $('#canvas9').text("o");
-                turn = 0;
-        }
-                else{
-                if (marked[6] == "" && ((marked[8] == "x" && marked[7] == "x") || (marked[2] == "x" && marked[4] == "x") || (marked[0] == "x" && marked[3] == "x"))) {
-                    $('#canvas7').text("o");
-                    turn = 0;
-        }
-                    else{
-                    if (marked[7] == "" && ((marked[8] == "x" && marked[6] == "x") || (marked[1] == "x" && marked[4] == "x"))) {
-                        $('#canvas8').text("o");
-                        turn = 0;
-        }
-                        else{
-                        if (marked[3] == "" && ((marked[5] == "x" && marked[4] == "x") || (marked[0] == "x" && marked[6] == "x"))) {
-                            $('#canvas4').text("o");
-                            turn = 0;
-        }
-                            else{
-                            if (marked[5] == "" && ((marked[2] == "x" && marked[8] == "x") || (marked[4] == "x" && marked[3] == "x"))) {
-                                $('#canvas6').text("o");
-                                turn = 0;
-        }
-                                else{
-                                if (marked[4] == "" && ((marked[2] == "x" && marked[6] == "x") || (marked[8] == "x" && marked[0] == "x") || (marked[5] == "x" && marked[3] == "x") || (marked[7] == "x" && marked[1] == "x"))) {
-                                    $('#canvas5').text("o");
-                                    turn = 0;
-        }
-                                   else{ // IF NO OPP TO BLOCK A WIN, THEN PLAY IN ONE OF THESE SQUARES
-                                    if (marked[4] == "") {
-                                        $('#canvas5').text("o");
-                                        turn = 0;
-                                       
-                                    }
-                                        else{
-                                        if (marked[0] == "") {
-                                            $('#canvas1').text("o");
-                                            turn = 0;
-                                            
-                                    }
-                                            else{
-                                            if (marked[8] == "") {
-                                            $('#canvas9').text("o");
-                                            turn = 0;
-                                          
-                                    } 
-                                                else {
-                                                if (marked[7] == "") {
-                                            $('#canvas8').text("o");
-                                            turn = 0;
-                                          
-                                    }
-                                                    else{
-                                                    if (marked[3] == "") {
-                                            $('#canvas4').text("o");
-                                            turn = 0;
-                                          
-                                    }
-                                                    }
-                                                }
-                                            }
-                                   
-                                    
-                                        }
-                                   }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }   
+    }
 };
 
 

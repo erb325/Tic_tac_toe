@@ -4,8 +4,12 @@
 
 
     <script type="text/javascript">
-
-
+    /* This is  a Tic-Tac- Toe 
+     * starting with the declaration of the global variables
+     * these variables can be accessed anywhere in the 
+     * program. They do not need a "TYPE" specified at 
+     * declaration. 
+     */
         var marked;
         var content;
         var combinations;
@@ -14,95 +18,171 @@
         var c;
         var cxt;
         var squaresFilled = 0;
-        var w;
+        var stats;
         var y;
+        var gameCounter=0;
+        var xWins = 0;
+        var yWins = 0;
+        var draws = 0;
 
-
+    /* when the window loads do this
+     * this filles all the arrays with 
+     * NULL cases
+     */
         window.onload=function(){
-
             marked = new Array();
             content = new Array();
-            combinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+            combinations = [[0,1,2],[3,4,5],[6,7,8],        // all the winning combination 
+                            [0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
-            for(var i = 0; i<= 8; i++){
+            for(i = 0; i<= 8; i++){
                 marked[i] = false;
-                content[i]='';
+                content[i]=2;
             }
+            var i;
         }
 
+    /* When ever a user clicks the "canvas" aka the box
+     * it calles the canvase clicked function */
 
         function canvasClicked(canvasNumber){
-            theCanvas = "canvas"+canvasNumber;
-            c = document.getElementById(theCanvas);
-            cxt = c.getContext("2d");
+            theCanvas = "canvas"+canvasNumber;              // sets up the string for the canvas name 
+            c = document.getElementById(theCanvas);         // sets up where the "drawing"
+            cxt = c.getContext("2d");                       // will be 
 
+        /* if the canvas clicked is not marked 
+         * then draw the appropriate turn's x or o
+         * then set the spot in the array as marked
+         * and check for winners otherwise 
+         * alart the player that the space is already 
+         * occupied and to make another move
+         */
             if(marked[canvasNumber-1] ==false){
-                if(turn%2==0){
-                    cxt.beginPath();
+               
+                if(turn%2==0){                               //x turn
+                        
+                    cxt.beginPath();                         // draw X
                     cxt.moveTo(10,10);
                     cxt.lineTo(40,40);
                     cxt.moveTo(40,10);
                     cxt.lineTo(10,40);
                     cxt.stroke();
                     cxt.closePath();
-                    content[canvasNumber-1] = 'X';
-                }
 
-                else{
-                    cxt.beginPath();
+                    content[canvasNumber-1] = 'X';          //mark in the content array what move was made
+
+                } else {                                    // o turn 
+                    
+                    cxt.beginPath();                        // draw O 
                     cxt.arc(25,25,20,0,Math.PI*2,true);
                     cxt.stroke();
                     cxt.closePath();
-                    content[canvasNumber-1] = 'O';
+
+                    content[canvasNumber-1] = 'O';          //mark in the content array what move was made 
                 }
 
-                turn++;
-                marked[canvasNumber-1] = true;
-                squaresFilled++;
-                checkForWinners(content[canvasNumber-1]);
+                turn++;                                     // increment the turn counter 
+                marked[canvasNumber-1] = true;              // mark the canvas as filled
+                squaresFilled++;                            // increment squarefilled counter 
 
+                checkForWinners(content[canvasNumber-1]);   /* call the check for winner funciton
+                                                             * and send it the turn that was just made
+                                                             * to see if they won 
+                                                             */
+                /* if all the squares are filled then 
+                 * alert to a Draw and reload game
+                 */
                 if(squaresFilled==9){
-                    alert("THE GAME IS OVER!");
-                    location.reload(true);
+                    alert("Game ended in a draw");
+                    gameCounter++;                           // increment game counter
+                    newGame();                               // call new game function       
+                  }
 
-                }
-
+            } else {                                          // alert that the spot is occupied        
+                alert("ERROR: YOU CAN'T SIT WITH US, this space is already occupied");
             }
-            else{
-                alert("THAT SPACE IS ALREADY OCCUPIED");
-            }
-
         }
 
+    /* Check for winners funtion takes a symbol 
+     * that was given to it by the content array
+     * and checks if that symbol matchs any of the 
+     * winning combinations
+     */ 
         function checkForWinners(symbol){
-
-            for(var a = 0; a < combinations.length; a++){
-                if(content[combinations[a][0]]==symbol&&content[combinations[a][1]]==	symbol&&content[combinations[a][2]]==symbol){
-                    alert(symbol+ " WON!");
-                    playAgain();
+            /* In Javascript you do not have to declare a variable before you use it
+             * you can actually decare it after it is used, its called a hoisted variable.
+             * but to use a variable that has not been declared you must assign is a value
+             * otherwise is reads as a NULL
+             */
+             var printStats =0;
+            for(a = 0; a < combinations.length; a++){
+                if(content[combinations[a][0]] == symbol && content[combinations[a][1]] == symbol && 
+                    content[combinations[a][2]] == symbol){
+                /* this conditional is reached when someone wins
+                 * it checks the winning symbol, increments the gamecounter
+                 * increments the winning symbol counters
+                 * calculates the percent of wins and alerts the users
+                 * of the winners stats 
+                 */
+                    if(symbol === 'X'){
+                        alert("X WON! ");            
+                        gameCounter++;
+                        xWins++;
+                        printStats = xWins/gameCounter *100;
+                        alert("X percent wins: " + printStats+"%");
+                    } else if (symbol === 'O'){
+                        alert("O WON!");
+                        gameCounter++;
+                        yWins++;
+                        printStats = yWins/gameCounter *100;
+                        alert("O percent of wins: " + printStats +"%");
+                    }
+        
+                    playAgain();                        // call play again
                 }
             }
-
+            var a;                                      // declaration of counter a
         }
 
+    /* Alert players to ask if they want to play again 
+     */
         function playAgain(){
-            y=confirm("PLAY AGAIN?");
-            if(y==true){
-                alert("OKAY!");
-                location.reload(true);
+            y = confirm("Do you want to play again?");
+            if(y == true){                                // if yes then reload
+                newGame(); 
+           } else {
+                alert("Fine, Leave me then");            // else do not reload
             }
-            else{
-                alert("Sad :(");
-            }
-
         }
 
+        /* NewGame clears all the canvases and 
+         * reinitializes the global arrays and 
+         * counters that need to be used for each game
+         */
+        function newGame (){
+            for (var j = 1; j!= 10; j++){
+                theCanvas = "canvas"+j;               
+                c = document.getElementById(theCanvas);         
+                cxt = c.getContext("2d"); 
+                cxt.clearRect(0,0,50,50);
+            } 
+            for(i = 0; i<= 8; i++){
+                marked[i] = false;
+                content[i]=2;
+            }
+            var i;
+            turn =0;
+            squaresFilled =0;  
+        }
 
     </script>
 </head>
 <body>
 <div id ="box">
     <h1>Tic-Tac-Toe</h1>
+    <h2>OPL Programming Project</h2>
+    <h3>Programmed by Laura Peiffer and Ember Baker</h3>
+    
     <canvas id = "canvas1"  width="50" height="50"
             style="border:5px solid black" onclick="canvasClicked(1)"></canvas>
     <canvas id = "canvas2"  width="50" height="50"
@@ -122,7 +202,6 @@
     <canvas id = "canvas9"  width="50" height="50"
             style="border:5px solid black" onclick="canvasClicked(9)"></canvas>
 </div>
+
 </body>
 </html>
-
-

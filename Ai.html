@@ -1,0 +1,301 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+
+    <script type="text/javascript">
+
+    /* This is the AI for Tic-Tac-Toe
+     * starting with the declaration of the global variables
+     * these variables can be accessed anywhere in the 
+     * program. They do not need a "TYPE" specified at 
+     * declaration. 
+     */
+        var marked;
+        var content;
+        var combinations;
+        var turn = 0;
+        var theCanvas;
+        var c;
+        var cxt;
+        var squaresFilled = 0;
+        var w;
+        var y;
+
+    /* when the window loads do this
+     * this filles all the arrays with 
+     * NULL cases
+     */ 
+        window.onload=function(){
+            marked = new Array();
+            content = new Array();
+            combinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+            for(var i = 0; i<= 8; i++){
+                marked[i] = false;
+                content[i]='';
+            }
+        }
+
+    /* When ever a user clicks the "canvas" aka the box
+     * it calles the canvase clicked function */
+        function canvasClicked(canvasNumber){
+            theCanvas = "canvas"+canvasNumber;
+            c = document.getElementById(theCanvas);
+            cxt = c.getContext("2d");
+            if(marked[canvasNumber-1] ==false){
+                if(turn%2==0){
+                    cxt.beginPath();
+                    cxt.moveTo(10,10);
+                    cxt.lineTo(40,40);
+                    cxt.moveTo(40,10);
+                    cxt.lineTo(10,40);
+                    cxt.stroke();
+                    cxt.closePath();
+                    content[canvasNumber-1] = 'X';
+                }
+                //else {
+                    /* if its the computers turn then make a move...
+                     * return the canvase number?? or something like that
+                     */
+                    //c = document.getElementById(theCanvas);
+                    //cxt = c.getContext("2d");
+                    //cxt.beginPath();
+                    //cxt.arc(25,25,20,0,Math.PI*2,true);
+                    //cxt.stroke();
+                    //cxt.closePath();
+                    //compMove();
+                    //content[canvasNumber-1] = 'O';
+                //}
+                turn++;
+                marked[canvasNumber-1] = true;
+                squaresFilled++;
+                checkForWinners(content[canvasNumber-1]);
+                if(squaresFilled==9){
+                    alert("THE GAME IS OVER!");
+                    location.reload(true);
+                }
+            }
+            else{
+                alert("THAT SPACE IS ALREADY OCCUPIED");
+            }
+            compMove():
+        }
+
+    function compMove (){
+    if (content[0] == "" && ((content[2] == "x" && content[1] == "x") || (content[8] == "x" && content[5] == "x") || (content[6] == "x" && content[3] == "x"))) {
+        //$('#canvas1').text("o");
+
+        c = document.getElementById(1);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+         
+        marked[canvasNumber-1] = true;
+        turn = 0;
+
+    } else if (content[1] == "" && ((content[0] == "x" && content[2] == "x") || (content[7] == "x" && content[4] == "x"))) {
+        //$('#canvas2').text("o");
+        c = document.getElementById(2);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[2] == "" && ((content[0] == "x" && content[1] == "x") || (content[6] == "x" && content[4] == "x") ||      (content[8] == "x" && content[5] == "x"))) {
+       // $('#canvas3').text("o");
+        c = document.getElementById(3);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[8] == "" && ((content[6] == "x" && content[7] == "x") || (content[0] == "x" && content[4] == "x") ||      (content[2] == "x" && content[5] == "x"))) {
+       // $('#canvas9').text("o");
+
+        c = document.getElementById(9);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[6] == "" && ((content[8] == "x" && content[7] == "x") || (content[2] == "x" && content[4] == "x") ||      (content[0] == "x" && content[3] == "x"))) {
+        //$('#canvas7').text("o");
+        c = document.getElementById(7);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[7] == "" && ((content[8] == "x" && content[6] == "x") || (content[1] == "x" && content[4] == "x"))) {
+        //$('#canvas8').text("o");
+
+        c = document.getElementById(8);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[3] == "" && ((content[5] == "x" && content[4] == "x") || (content[0] == "x" && content[6] == "x"))) {
+        //$('#canvas4').text("o");
+
+         c = document.getElementById(4);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[5] == "" && ((content[2] == "x" && content[8] == "x") || (content[4] == "x" && content[3] == "x"))) {
+        //$('#canvas6').text("o");
+
+        c = document.getElementById(6);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else if (content[4] == "" && ((content[2] == "x" && content[6] == "x") || (content[8] == "x" && content[0] == "x") ||      (content[5] == "x" && content[3] == "x") || (content[7] == "x" && content[1] == "x"))) {
+        //$('#canvas5').text("o");
+
+        c = document.getElementById(5);
+        cxt = c.getContext("2d");
+        cxt.beginPath();
+        cxt.arc(25,25,20,0,Math.PI*2,true);
+        cxt.stroke();
+        cxt.closePath();
+        marked[canvasNumber-1] = true;
+
+        turn = 0;
+    } else{ // IF NO OPP TO BLOCK A WIN, THEN PLAY IN ONE OF THESE SQUARES
+        if (content[4] == "") {
+            //$('#canvas5').text("o");
+
+            c = document.getElementById(5);
+            cxt = c.getContext("2d");
+            cxt.beginPath();
+            cxt.arc(25,25,20,0,Math.PI*2,true);
+            cxt.stroke();
+            cxt.closePath();
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        } else if (content[0] == "") {
+            //$('#canvas1').text("o");
+            c = document.getElementById(1);
+            cxt = c.getContext("2d");
+            cxt.beginPath();
+            cxt.arc(25,25,20,0,Math.PI*2,true);
+            cxt.stroke();
+            cxt.closePath();
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        } else if (content[8] == "") {
+            //$('#canvas9').text("o");
+
+            c = document.getElementById(9);
+            cxt = c.getContext("2d");
+            cxt.beginPath();
+            cxt.arc(25,25,20,0,Math.PI*2,true);
+            cxt.stroke();
+            cxt.closePath();
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        } else if (content[7] == "") {
+            //$('#canvas8').text("o");
+            c = document.getElementById(8);
+            cxt = c.getContext("2d");
+            cxt.beginPath();
+            cxt.arc(25,25,20,0,Math.PI*2,true);
+            cxt.stroke();
+            cxt.closePath();
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        } else if (content[3] == "") {
+            //$('#canvas4').text("o");
+
+            c = document.getElementById(4);
+            cxt = c.getContext("2d");
+            cxt.beginPath();
+            cxt.arc(25,25,20,0,Math.PI*2,true);
+            cxt.stroke();
+            cxt.closePath();
+            marked[canvasNumber-1] = true;
+
+            turn = 0;
+        }
+    }
+    squaresFilled++;
+                checkForWinners(content[canvasNumber-1]);
+}
+
+        function checkForWinners(symbol){
+            for(var a = 0; a < combinations.length; a++){
+                if(content[combinations[a][0]]==symbol&&content[combinations[a][1]]==	symbol&&content[combinations[a][2]]==symbol){
+                    alert(symbol+ " WON!");
+                    playAgain();
+                }
+            }
+        }
+        function playAgain(){
+            y=confirm("PLAY AGAIN?");
+            if(y==true){
+                alert("OKAY!");
+                location.reload(true);
+            }
+            else{
+                alert("Sad :(");
+            }
+        }
+    </script>
+</head>
+<body>
+<div id ="box">
+    <h1>Tic-Tac-Toe</h1>
+    <canvas id = "canvas1"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(1)"></canvas>
+    <canvas id = "canvas2"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(2)"></canvas>
+    <canvas id = "canvas3"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(3)"></canvas><br/>
+    <canvas id = "canvas4"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(4)"></canvas>
+    <canvas id = "canvas5"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(5)"></canvas>
+    <canvas id = "canvas6"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(6)"></canvas><br/>
+    <canvas id = "canvas7"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(7)"></canvas>
+    <canvas id = "canvas8"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(8)"></canvas>
+    <canvas id = "canvas9"  width="50" height="50"
+            style="border:5px solid black" onclick="canvasClicked(9)"></canvas>
+</div>
+</body>
+</html>
