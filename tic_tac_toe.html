@@ -127,14 +127,12 @@
                     if(symbol === 'X'){
                         alert("X WON! ");            
                         gameCounter++;
-                        xWins++;
-                        printStats = xWins/gameCounter *100;
+                        printStats = ++xWins/gameCounter *100;
                         alert("X percent wins: " + printStats+"%");
                     } else if (symbol === 'O'){
                         alert("O WON!");
                         gameCounter++;
-                        yWins++;
-                        printStats = yWins/gameCounter *100;
+                        printStats = ++yWins/gameCounter *100;
                         alert("O percent of wins: " + printStats +"%");
                     }
         
