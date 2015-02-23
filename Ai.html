@@ -51,7 +51,7 @@
                     cxt.lineTo(10,40);
                     cxt.stroke();
                     cxt.closePath();
-                    content[canvasNumber-1] = 'X';
+                    content[canvasNumber-1] = "x";
                 }
                 //else {
                     /* if its the computers turn then make a move...
@@ -78,182 +78,187 @@
             else{
                 alert("THAT SPACE IS ALREADY OCCUPIED");
             }
-            compMove():
+            compMove();
         }
 
-    function compMove (){
-    if (content[0] == "" && ((content[2] == "x" && content[1] == "x") || (content[8] == "x" && content[5] == "x") || (content[6] == "x" && content[3] == "x"))) {
-        //$('#canvas1').text("o");
+        function compMove(){
+            if (content[0] == "" && ((content[2] == "x" && content[1] == "x") || (content[8] == "x" && content[5] == "x") || (content[6] == "x" && content[3] == "x"))) {
+                    //$('#canvas1').text("o");
+                    canvasNumber = 1;
+                    c = document.getElementById("canvas1");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
+                    content[canvasNumber - 1]="o";
+                    marked[canvasNumber - 1] = true;
+                    turn = 0;
 
-        c = document.getElementById(1);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
-         
-        marked[canvasNumber-1] = true;
-        turn = 0;
+                } else if (content[1] == "" && ((content[0] == "x" && content[2] == "x") || (content[7] == "x" && content[4] == "x"))) {
+                    //$('#canvas2').text("o");
+                    canvasNumber=2;
+                    c = document.getElementById("canvas2");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
 
-    } else if (content[1] == "" && ((content[0] == "x" && content[2] == "x") || (content[7] == "x" && content[4] == "x"))) {
-        //$('#canvas2').text("o");
-        c = document.getElementById(2);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
+                    marked[canvasNumber - 1] = true;
+                    content[canvasNumber - 1]="o";
+                    turn = 0;
+                } else if (content[2] == "" && ((content[0] == "x" && content[1] == "x") || (content[6] == "x" && content[4] == "x") || (content[8] == "x" && content[5] == "x"))) {
+                    // $('#canvas3').text("o");
+                    canvasNumber=3;
+                    c = document.getElementById("canvas3");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
 
-        marked[canvasNumber-1] = true;
-
-        turn = 0;
-    } else if (content[2] == "" && ((content[0] == "x" && content[1] == "x") || (content[6] == "x" && content[4] == "x") ||      (content[8] == "x" && content[5] == "x"))) {
-       // $('#canvas3').text("o");
-        c = document.getElementById(3);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
-
-        marked[canvasNumber-1] = true;
-
-        turn = 0;
-    } else if (content[8] == "" && ((content[6] == "x" && content[7] == "x") || (content[0] == "x" && content[4] == "x") ||      (content[2] == "x" && content[5] == "x"))) {
-       // $('#canvas9').text("o");
-
-        c = document.getElementById(9);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
-        marked[canvasNumber-1] = true;
-
-        turn = 0;
-    } else if (content[6] == "" && ((content[8] == "x" && content[7] == "x") || (content[2] == "x" && content[4] == "x") ||      (content[0] == "x" && content[3] == "x"))) {
-        //$('#canvas7').text("o");
-        c = document.getElementById(7);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
-        marked[canvasNumber-1] = true;
-
-        turn = 0;
-    } else if (content[7] == "" && ((content[8] == "x" && content[6] == "x") || (content[1] == "x" && content[4] == "x"))) {
-        //$('#canvas8').text("o");
-
-        c = document.getElementById(8);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
-        marked[canvasNumber-1] = true;
-
-        turn = 0;
-    } else if (content[3] == "" && ((content[5] == "x" && content[4] == "x") || (content[0] == "x" && content[6] == "x"))) {
-        //$('#canvas4').text("o");
-
-         c = document.getElementById(4);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
-        marked[canvasNumber-1] = true;
-
-        turn = 0;
-    } else if (content[5] == "" && ((content[2] == "x" && content[8] == "x") || (content[4] == "x" && content[3] == "x"))) {
-        //$('#canvas6').text("o");
-
-        c = document.getElementById(6);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
-        marked[canvasNumber-1] = true;
-
-        turn = 0;
-    } else if (content[4] == "" && ((content[2] == "x" && content[6] == "x") || (content[8] == "x" && content[0] == "x") ||      (content[5] == "x" && content[3] == "x") || (content[7] == "x" && content[1] == "x"))) {
-        //$('#canvas5').text("o");
-
-        c = document.getElementById(5);
-        cxt = c.getContext("2d");
-        cxt.beginPath();
-        cxt.arc(25,25,20,0,Math.PI*2,true);
-        cxt.stroke();
-        cxt.closePath();
-        marked[canvasNumber-1] = true;
-
-        turn = 0;
-    } else{ // IF NO OPP TO BLOCK A WIN, THEN PLAY IN ONE OF THESE SQUARES
-        if (content[4] == "") {
-            //$('#canvas5').text("o");
-
-            c = document.getElementById(5);
-            cxt = c.getContext("2d");
-            cxt.beginPath();
-            cxt.arc(25,25,20,0,Math.PI*2,true);
-            cxt.stroke();
-            cxt.closePath();
-            marked[canvasNumber-1] = true;
-
-            turn = 0;
-        } else if (content[0] == "") {
-            //$('#canvas1').text("o");
-            c = document.getElementById(1);
-            cxt = c.getContext("2d");
-            cxt.beginPath();
-            cxt.arc(25,25,20,0,Math.PI*2,true);
-            cxt.stroke();
-            cxt.closePath();
-            marked[canvasNumber-1] = true;
-
-            turn = 0;
-        } else if (content[8] == "") {
-            //$('#canvas9').text("o");
-
-            c = document.getElementById(9);
-            cxt = c.getContext("2d");
-            cxt.beginPath();
-            cxt.arc(25,25,20,0,Math.PI*2,true);
-            cxt.stroke();
-            cxt.closePath();
-            marked[canvasNumber-1] = true;
-
-            turn = 0;
-        } else if (content[7] == "") {
-            //$('#canvas8').text("o");
-            c = document.getElementById(8);
-            cxt = c.getContext("2d");
-            cxt.beginPath();
-            cxt.arc(25,25,20,0,Math.PI*2,true);
-            cxt.stroke();
-            cxt.closePath();
-            marked[canvasNumber-1] = true;
-
-            turn = 0;
-        } else if (content[3] == "") {
-            //$('#canvas4').text("o");
-
-            c = document.getElementById(4);
-            cxt = c.getContext("2d");
-            cxt.beginPath();
-            cxt.arc(25,25,20,0,Math.PI*2,true);
-            cxt.stroke();
-            cxt.closePath();
-            marked[canvasNumber-1] = true;
-
-            turn = 0;
-        }
-    }
-    squaresFilled++;
-                checkForWinners(content[canvasNumber-1]);
-}
+                    marked[canvasNumber - 1] = true;
+                    content[canvasNumber - 1]="o";
+                    turn = 0;
+                } else if (content[8] == "" && ((content[6] == "x" && content[7] == "x") || (content[0] == "x" && content[4] == "x") || (content[2] == "x" && content[5] == "x"))) {
+                    // $('#canvas9').text("o");
+                    canvasNumber = 9;
+                    c = document.getElementById("canvas9");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
+                    marked[canvasNumber - 1] = true;
+                    content[canvasNumber - 1]="o";
+                    turn = 0;
+                } else if (content[6] == "" && ((content[8] == "x" && content[7] == "x") || (content[2] == "x" && content[4] == "x") || (content[0] == "x" && content[3] == "x"))) {
+                    //$('#canvas7').text("o");
+                    canvasNumber=7;
+                    c = document.getElementById("canvas7");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
+                    marked[canvasNumber - 1] = true;
+                    content[canvasNumber - 1]="o";
+                    turn = 0;
+                } else if (content[7] == "" && ((content[8] == "x" && content[6] == "x") || (content[1] == "x" && content[4] == "x"))) {
+                    //$('#canvas8').text("o");
+                    canvasNumber= 8;
+                    c = document.getElementById("canvas8");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
+                    marked[canvasNumber - 1] = true;
+                    content[canvasNumber - 1]="o";
+                    turn = 0;
+                } else if (content[3] == "" && ((content[5] == "x" && content[4] == "x") || (content[0] == "x" && content[6] == "x"))) {
+                    //$('#canvas4').text("o");
+                    canvasNumber=4;
+                    c = document.getElementById("canvas4");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
+                    marked[canvasNumber - 1] = true;
+                    content[canvasNumber - 1]="o";
+                    turn = 0;
+                } else if (content[5] == "" && ((content[2] == "x" && content[8] == "x") || (content[4] == "x" && content[3] == "x"))) {
+                    //$('#canvas6').text("o");
+                    canvasNumber=6;
+                    c = document.getElementById("canvas6");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
+                    marked[canvasNumber - 1] = true;
+                    content[canvasNumber - 1]="o";
+                    turn = 0;
+                } else if (content[4] == "" && ((content[2] == "x" && content[6] == "x") || (content[8] == "x" && content[0] == "x") || (content[5] == "x" && content[3] == "x") || (content[7] == "x" && content[1] == "x"))) {
+                    //$('#canvas5').text("o");
+                    canvasNumber=5;
+                    c = document.getElementById("canvas5");
+                    cxt = c.getContext("2d");
+                    cxt.beginPath();
+                    cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                    cxt.stroke();
+                    cxt.closePath();
+                    marked[canvasNumber - 1] = true;
+                    content[canvasNumber - 1]="o";
+                    turn = 0;
+                } else { // IF NO OPP TO BLOCK A WIN, THEN PLAY IN ONE OF THESE SQUARES
+                    if (content[4] == "") {
+                        //$('#canvas5').text("o");
+                        canvasNumber=5;
+                        c = document.getElementById("canvas5");
+                        cxt = c.getContext("2d");
+                        cxt.beginPath();
+                        cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                        cxt.stroke();
+                        cxt.closePath();
+                        marked[canvasNumber - 1] = true;
+                        content[canvasNumber - 1]="o";
+                        turn = 0;
+                    } else if (content[0] == "") {
+                        //$('#canvas1').text("o");
+                        canvasNumber=1;
+                        c = document.getElementById("canvas1");
+                        cxt = c.getContext("2d");
+                        cxt.beginPath();
+                        cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                        cxt.stroke();
+                        cxt.closePath();
+                        marked[canvasNumber - 1] = true;
+                        content[canvasNumber - 1]="o";
+                        turn = 0;
+                    } else if (content[8] == "") {
+                        //$('#canvas9').text("o");
+                        canvasNumber = 9;
+                        c = document.getElementById("canvas9");
+                        cxt = c.getContext("2d");
+                        cxt.beginPath();
+                        cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                        cxt.stroke();
+                        cxt.closePath();
+                        marked[canvasNumber - 1] = true;
+                        content[canvasNumber - 1]="o";
+                        turn = 0;
+                    } else if (content[7] == "") {
+                        //$('#canvas8').text("o");
+                        canvasNumber=8;
+                        c = document.getElementById("canvas8");
+                        cxt = c.getContext("2d");
+                        cxt.beginPath();
+                        cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                        cxt.stroke();
+                        cxt.closePath();
+                        marked[canvasNumber - 1] = true;
+                        content[canvasNumber - 1]="o";
+                        turn = 0;
+                    } else if (content[3] == "") {
+                        //$('#canvas4').text("o");
+                        canvasNumber=4;
+                        c = document.getElementById("canvas4");
+                        cxt = c.getContext("2d");
+                        cxt.beginPath();
+                        cxt.arc(25, 25, 20, 0, Math.PI * 2, true);
+                        cxt.stroke();
+                        cxt.closePath();
+                        marked[canvasNumber - 1] = true;
+                        content[canvasNumber - 1]="o";
+                        turn = 0;
+                    }
+                }
+                squaresFilled++;
+                checkForWinners(content[canvasNumber - 1]);
+            }
 
         function checkForWinners(symbol){
             for(var a = 0; a < combinations.length; a++){
